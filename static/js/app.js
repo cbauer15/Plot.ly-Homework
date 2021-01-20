@@ -36,6 +36,7 @@ function optionChanged() {
 
         BacteriaId = filteredsampleData[0].otu_ids
         BacteriaValues = filteredsampleData[0].sample_values
+        BacteriaLabel = filteredsampleData[0].otu_labels
 
         demoInfo.html("");
 
@@ -47,7 +48,7 @@ function optionChanged() {
         var topOTUrace = [{
             x: topBacteriaValues,
             y: topBacteriaId.map(bact => "OTU" + bact),
-            text: topBacteriaId.map(bact => "OTU" + bact),
+            text: BacteriaLabel,
             name: "OTU",
             type: "bar",
             orientation: "h"
@@ -55,17 +56,18 @@ function optionChanged() {
 
         Plotly.newPlot("bar", topOTUrace)
 
-        var trace1 = {
+        var Bubble = {
             y: BacteriaValues,
             x: BacteriaId,
+            text: BacteriaLabel,
             mode: 'markers',
             marker: {
-              colorscale: 'Portland',
+              color: BacteriaId,
               size: BacteriaValues
             }
           };
           
-          var data = [trace1];
+          var data = [Bubble];
           
           var layout = {
             title: 'Marker Size and Color',
