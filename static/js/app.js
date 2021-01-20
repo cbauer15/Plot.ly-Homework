@@ -7,7 +7,8 @@ function optionChanged() {
     d3.json("../samples.json").then((importedData) => {
         var data = importedData;
         var dropdownMenu = d3.select("#selDataset");
-
+        
+        // dropdownMenu.html("")
         data.names.forEach(name => {
             dropdownMenu.append("option").text(name).attr("value", name)
         });
@@ -19,17 +20,15 @@ function optionChanged() {
 
         // Filtering Meta Data
         var filteredmetaData = data.metadata.filter(person => person.id == idLookup)
-        console.log(filteredmetaData)
-        cleanButton = filteredmetaData[0].wfreq
+        var cleanButton = filteredmetaData[0].wfreq
 
         // Filtering Sample Data
         var filteredsampleData = data.samples.filter(person => person.id == idLookup)
-        console.log(filteredsampleData[0])
-        topBacteriaId = filteredsampleData[0].otu_ids.slice(0, 10).reverse();
-        topBacteriaValues = filteredsampleData[0].sample_values.slice(0, 10).reverse();
-        BacteriaId = filteredsampleData[0].otu_ids
-        BacteriaValues = filteredsampleData[0].sample_values
-        BacteriaLabel = filteredsampleData[0].otu_labels
+        var topBacteriaId = filteredsampleData[0].otu_ids.slice(0, 10).reverse();
+        var topBacteriaValues = filteredsampleData[0].sample_values.slice(0, 10).reverse();
+        var BacteriaId = filteredsampleData[0].otu_ids
+        var BacteriaValues = filteredsampleData[0].sample_values
+        var BacteriaLabel = filteredsampleData[0].otu_labels
 
         // Summary Table
         demoInfo.html("");
@@ -80,21 +79,16 @@ function optionChanged() {
                 gauge: {
                     axis: { range: [null, 9] },
                     steps: [
-                        { range: [0, 1], color: "red" },
-                        { range: [1, 2], color: "orange" },
-                        { range: [2, 3], color: "yellow" },
-                        { range: [3, 4], color: "green" },
-                        { range: [4, 5], color: "blue" },
-                        { range: [5, 6], color: "blue" },
-                        { range: [6, 7], color: "blue" },
+                        { range: [0, 1], color: "lightgray" },
+                        { range: [1, 2], color: "lightslategray" },
+                        { range: [2, 3], color: "gray" },
+                        { range: [3, 4], color: "lightgreen" },
+                        { range: [4, 5], color: "green" },
+                        { range: [5, 6], color: "darkgreen" },
+                        { range: [6, 7], color: "lightblue" },
                         { range: [7, 8], color: "blue" },
-                        { range: [8, 9], color: "blue" },
+                        { range: [8, 9], color: "darkblue" },
                     ],
-                    threshold: {
-                        line: { color: "purple", width: 4 },
-                        thickness: 0.75,
-                        value: 7
-                    }
                 }
             }
         ];
